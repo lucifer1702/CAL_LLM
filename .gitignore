@@ -1,0 +1,3 @@
+/backend/myenv
+.mypy_cache
+.env
