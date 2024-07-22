@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { setExtractedText } from "./summary"; // Adjust the path as necessary
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
-  const [extractedText, setExtractedText] = useState("");
+  const [extractedText, setExtractedTextState] = useState("");
   const [error, setError] = useState("");
+  const [summaryGenerated, setSummaryGenerated] = useState(false);
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -22,23 +24,25 @@ const FileUpload = () => {
       const response = await fetch("http://localhost:8080/upload", {
         method: "POST",
         body: formData,
-        header: {
+        headers: {
           "Access-Control-Allow-Origin": "*",
         },
       });
-      console.log("Response status:", response.status);
+
       const data = await response.json();
       if (response.ok) {
-        setExtractedText(data.summary);
+        setExtractedTextState(data.summary);
+        setExtractedText(data.summary); // Export the extracted text
+        setSummaryGenerated(true); // Indicate that the summary has been generated
         setError("");
       } else {
         setError(data.error);
-        setExtractedText("");
+        setExtractedTextState("");
       }
     } catch (error) {
       console.log(error);
       setError("An error occurred while uploading the file.");
-      setExtractedText("");
+      setExtractedTextState("");
     }
   };
 
@@ -48,10 +52,9 @@ const FileUpload = () => {
       <input type="file" accept=".pdf" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload PDF</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {extractedText && (
+      {summaryGenerated && (
         <div>
-          <h2>SUMMARY:</h2>
-          <pre>{extractedText}</pre>
+          <h2>Summary Generated!</h2>
         </div>
       )}
     </div>
