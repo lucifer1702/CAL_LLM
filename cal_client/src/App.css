@@ -1,7 +1,12 @@
 .App {
   text-align: center;
 }
-
+.Pdf {
+  text-align: top;
+  height: 10vmin;
+  background-color: white;
+  align-items: center;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

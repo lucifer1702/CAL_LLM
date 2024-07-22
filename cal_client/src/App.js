@@ -1,6 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import FileUpload from "./fileupload";
 
 function App() {
   const session = useSession();
@@ -36,6 +36,9 @@ function App() {
           <>
             <h2> hello!! {session.user.email}</h2>
             <button onClick={() => signOut()}>sign out with google :(</button>
+            <div className="Pdf">
+              <FileUpload />
+            </div>
           </>
         ) : (
           <>
