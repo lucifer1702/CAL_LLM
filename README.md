@@ -16,7 +16,7 @@ Supabase account
 Google Cloud account
 OPENAI API Keys
 
-# PDF READER MODULE -> BACKEND IN FLASK AND LLM WRAPPER USED FOR SUMMARY GENERATION
+## PDF READER MODULE -> BACKEND IN FLASK AND LLM WRAPPER USED FOR SUMMARY GENERATION
 
 1. Store your API Keys in the .env file
 
@@ -80,7 +80,7 @@ json
 
 ## app.js -> app logic and supabase integration
 
-# Calendar Event Creator
+## Calendar Event Creator
 
 This React application allows users to upload PDF files, extract summaries, and create calendar events in Google Calendar using the extracted text. It leverages Supabase for authentication and Google Calendar API for event management.
 
