@@ -72,7 +72,7 @@ json
 "error": "Invalid file type"
 }
 
-# src module -> front end code and react components integrated with Supabase
+## src module -> front end code and react components integrated with Supabase
 
 1. make sure to have a supabase account and gcloud account for login
 
@@ -150,3 +150,5 @@ return (
 }
 
 NOTE: Backend API: Ensure that your backend server is running and accessible at http://localhost:8080/upload for file uploads.
+
+Video Explanation:https://share.vidyard.com/watch/fwbsp3Q8fWkT9HPNwf2bEA?
