@@ -33,11 +33,15 @@ function App() {
   }
   async function createCalenderEvent() {
     const event = {
-     'summary': name,
-      'descrition': desc,
-      'start': {
-        'datetime': start.toISOString(),
-        'timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+      summary: name,
+      description: summ,
+      start: {
+        dateTime: start.toISOString(),
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      },
+      end: {
+        dateTime: end.toISOString(),
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       },
     };
     await fetch(
@@ -45,7 +49,7 @@ function App() {
       {
         method: "POST",
         headers: {
-          'Authorization': "Bearer " + session.provider_token,
+          Authorization: "Bearer " + session.provider_token,
         },
         body: JSON.stringify(event),
       },
@@ -53,7 +57,8 @@ function App() {
       .then((data) => {
         return data.json();
       })
-      .then(() => {
+      .then((data) => {
+        console.log(data);
         alert("Event created in Calendar :))");
       });
   }
@@ -91,6 +96,7 @@ function App() {
               <hr />
               <div className="bottom-div">
                 <button onClick={() => createCalenderEvent()}>Calendar</button>
+                <p></p>
               </div>
               <div className="top-right">
                 <button onClick={() => signOut()}>Sign Out</button>
