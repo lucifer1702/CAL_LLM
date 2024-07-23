@@ -28,13 +28,13 @@ The PDF Summarizer API provides a convenient way to extract text from PDF files 
 
 ## Installation
 
-a. **Clone the repository:**
-git clone <repository-url>
-cd <repository-directory>
-b. python -m venv venv
-source venv/bin/activate # On Windows: venv\Scripts\activate
-c.pip install -r requirements.txt
-d.flask run
+- **Clone the repository:**
+  git clone <repository-url>
+  cd <repository-directory>
+- python -m venv venv
+  source venv/bin/activate # On Windows: venv\Scripts\activate
+- pip install -r requirements.txt
+- flask run
 
 ## API Endpoints
 
