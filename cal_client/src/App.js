@@ -31,34 +31,73 @@ function App() {
   async function signOut() {
     await supabase.auth.signOut();
   }
+  async function createCalenderEvent() {
+    const event = {
+     'summary': name,
+      'descrition': desc,
+      'start': {
+        'datetime': start.toISOString(),
+        'timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+      },
+    };
+    await fetch(
+      "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+      {
+        method: "POST",
+        headers: {
+          'Authorization': "Bearer " + session.provider_token,
+        },
+        body: JSON.stringify(event),
+      },
+    )
+      .then((data) => {
+        return data.json();
+      })
+      .then(() => {
+        alert("Event created in Calendar :))");
+      });
+  }
   console.log(session);
   console.log(start);
   console.log(name);
   console.log(desc);
   return (
     <div className="App">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
-      >
+      <div>
         {session ? (
           <>
             <h4> {session.user.email}</h4>
-            <p> START OF THE MEET </p>
-            <DateTimePicker onChange={setStart} value={start} />
-            <p> END OF THE MEET </p>
-            <DateTimePicker onChange={setEnd} value={end} />
-            <p> NAME </p>
-            <input type="text" onChange={(e) => setName(e.target.value)} />
-            <p>SUMMARY-DESCRIPTION</p>
-            <form> desc </form>
-            <button onClick={() => signOut()}>:(</button>
-            <div className="top-div">
-              <FileUpload />
+            <div className="form-container">
+              <p>START OF THE MEET</p>
+              <div className="form-group">
+                <DateTimePicker onChange={setStart} value={start} />
+              </div>
+              <p>END OF THE MEET</p>
+              <div className="form-group">
+                <DateTimePicker onChange={setEnd} value={end} />
+              </div>
+              <p>NAME</p>
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="input-field"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <p>SUMMARY-DESCRIPTION</p>
+              <div className="form-group">
+                <form>{summ}</form>
+              </div>
+              <hr />
+              <div className="bottom-div">
+                <button onClick={() => createCalenderEvent()}>Calendar</button>
+              </div>
+              <div className="top-right">
+                <button onClick={() => signOut()}>Sign Out</button>
+              </div>
+              <div className="top-div">
+                <FileUpload />
+              </div>
             </div>
           </>
         ) : (
